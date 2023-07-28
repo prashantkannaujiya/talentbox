@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(211, 227, 233);
+}
+.icon{
+    font-size:1cm;
+    margin-right:1.45cm;
+}
+#Home{
+    text-align: left;
+    width:34%;
+    position:relative;
+    left:13.5cm;
+    top:3cm;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#Home p{
+    font-size: smaller;
+}
+#header{
+    background-color: black;
+    color:white;
+    text-align: center;
+    height:0.8cm;
+    padding-top:5px;
+}
+.header_button{
+    position:relative;
+    left:14.6cm;
+    margin-left:5px;
+}
+span{
+    position:relative;
+    left:1cm;
+}
+#sign{
+    text-align: center;
+}

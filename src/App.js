@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Home from "./Home";
+import Sign from "./Sign";
+import Dash from "./Dash";
+function App()
+{
+  var [navigate,setnavigate]=useState(0);
+  var [user,setuser]=useState(null)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  function openDash(i)
+  {
+    setuser(i)
+    setnavigate(2);
+
+  }
+  return(
+    <div id='App'>
+    <div id='header'>
+      <span>freeCodeCamp(^)</span>
+      <button className="header_button" style={{color:'white',backgroundColor:'black',border:'1px solid'}}>Menu</button>
+      <button className="header_button" style={{backgroundColor:'rgb(241, 185, 31)',border:'1px solid rgb(241, 185, 31) '}} onClick={()=>{setnavigate(1)}}>Sign In</button>
     </div>
-  );
+{
+  (()=>{
+    if(navigate==0)
+    {
+      return <Home></Home>
+    }
+    else if(navigate==1)
+    {
+     return <Sign u={openDash}></Sign>
+    }
+    else{
+return <Dash u={user}></Dash>
+    }
+  })()
 }
-
+    </div>
+  )
+}
 export default App;
