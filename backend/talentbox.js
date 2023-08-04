@@ -35,17 +35,18 @@ app.post('/insertGoogleData',async(req,res)=>{
     console.log(req.body.email)
     db.collection('box').findOne({email:req.body.email})
     .then(async(data)=>{
-        var token=jwt.sign(data.name,'Vishnu')
+        var token=jwt.sign(req.body.name,'Vishnu')
         if(data==null)
         {
             var p=await db.collection('box').insertOne({email:req.body.email});
             console.log(p)
-            res.send({message:'success',token,name:data.name})
+            res.send({message:'success',token,name:req.body.name})
         }
         else
         {
 console.log(data)
-res.send({message:'success',token,name:data.name})
+console.log(req.body.name)
+res.send({message:'success',token,name:req.body.name})
 
         }
     })
@@ -64,8 +65,8 @@ app.post('/signup',async(req,res)=>{
     {
         var l=await db.collection('box').insertOne(req.body);
         console.log(l)
-        var token=jwt.sign(k.name,"Vishnu")
-        res.send({message:'success',token,name:k.name})
+        var token=jwt.sign(req.body.name,"Vishnu")
+        res.send({message:'success',token,name:req.body.name})
        
     }
 })
@@ -91,13 +92,19 @@ app.post('/signup',async(req,res)=>{
  
   app.get('/fetchCourse',async(req,res)=>{
     db.collection('test').find({}).toArray().then((data)=>{
-        console.log(data)
+       
         res.send(data)
     })
     .catch(err=>console.log(err))
 
 
 
+  })
+  app.get('/auth/:token',(req,res)=>{ var tken=req.params.token;
+    console.log(tken);
+    var ds=jwt.verify(req.params.token,'Vishnu');
+    console.log(ds)
+    res.send({message:'approved',data:ds});
   })
 
 app.listen(2100,()=>{console.log('running')})

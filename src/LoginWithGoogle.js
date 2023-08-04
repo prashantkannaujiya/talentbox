@@ -34,10 +34,14 @@ function insertData(t)
         },
         body:JSON.stringify(t)
     })
+    .then(res=>res.json())
     .then((data)=>{alert('welcome');
     window.localStorage.setItem("token", data.token);
     window.localStorage.setItem("name", data.name);
-    props.u(data.name)
+    var l = document.getElementById("logout");
+    l.style.display = "inline";
+    console.log(data.name)
+    props.g(data.name)
 })
     .catch((err)=>{console.log(err)})
 }

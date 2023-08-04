@@ -25,7 +25,7 @@ body{
 }
 .header_button{
     position:relative;
-    left:14.6cm;
+    left:12.6cm;
     margin-left:5px;
 }
 span{
@@ -58,4 +58,9 @@ img{
 #Dashh{
     text-align: center;
     margin-bottom: 1.5cm;
+}
+#logout{
+    display: none;
+    position: relative;
+    left:12.5cm;
 }
