@@ -3,15 +3,17 @@ import LoginWithGoogle from "./LoginWithGoogle";
 import "./style.css";
 function Sign(props) {
   var [log, setlog] = useState(0);
+  var [isloading,setisloading]=useState(false);
   function signIn(e) {
     e.preventDefault();
+    setisloading(true)
     var x = document.getElementsByName("sign");
     var t = {
       email: x[0].value,
       name: x[1].value,
       password: x[2].value,
     };
-    fetch("http://localhost:2100/signup", {
+    fetch("https://deploy-tm73.onrender.com/signup", {
       method: "post",
       mode: "cors",
       headers: {
@@ -28,7 +30,9 @@ function Sign(props) {
           alert("User registered");
           window.localStorage.setItem("token", data.token);
           window.localStorage.setItem("name", data.name);
+          setisloading(false)
           var l = document.getElementById("logout");
+
           l.style.display = "inline";
           props.u(data.name);
         }
@@ -39,12 +43,13 @@ function Sign(props) {
   }
   function logIn(ev) {
     ev.preventDefault();
+    setisloading(true)
     var w = document.getElementsByName("log");
     var p = {
       email: w[0].value,
       password: w[1].value,
     };
-    fetch("http://localhost:2100/login", {
+    fetch("https://deploy-tm73.onrender.com/login", {
       method: "put",
       mode: "cors",
       headers: {
@@ -54,7 +59,7 @@ function Sign(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        
+setisloading(false)
         if (data.message == "unknown") {
           alert("Kindly register before logging");
         } else if (data.message == "wrong") {
@@ -100,7 +105,8 @@ function Sign(props) {
       >
         Login
       </button>
-      {log && (
+      {
+      log &&
         <form
           onSubmit={(e) => {
             logIn(e);
@@ -113,8 +119,26 @@ function Sign(props) {
           <br />
           <button>Submit</button>
         </form>
-      )}
-    </div>
+        
+          }
+          <div>
+{
+ (()=>{
+if(isloading)
+{
+  document.querySelector('body').style.opacity='0.3';
+  
+  return <div className="loaderPar"><div className="loader"></div></div>
+}
+else
+{
+  document.querySelector('body').style.opacity='1';
+}
+ })()
+}
+
+</div>
+</div>
   );
 }
 export default Sign;

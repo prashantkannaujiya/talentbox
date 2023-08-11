@@ -6,21 +6,29 @@ function App()
 {
   var [navigate,setnavigate]=useState(0);
   var [user,setuser]=useState(null)
+  var [isloading,setisloading]=useState(false);
 
   useEffect(()=>{
+    
     var u=window.localStorage.getItem("token");
     console.log(u)
     if(u!=null)
     {
-      fetch('http://localhost:2100/auth/'+u)
+      setisloading(true)
+      fetch('https://deploy-tm73.onrender.com/auth/'+u)
       .then((res) => res.json())
       .then((data) => {
         if (data.message == "approved") {
           console.log(data.data)
         openDash(data.data);
-       
+       setisloading(false)
         var l=document.getElementById('logout');
         l.style.display='inline';
+        }
+        else
+        {
+          setisloading(false)
+          window.localStorage.clear();
         }
     });
     }
@@ -41,7 +49,7 @@ function App()
   return(
     <div id='App'>
     <div id='header'>
-      <span>freeCodeCamp(^)</span>
+      <span id='webName'>CodeBootCamp(^)</span>
       <button id='logout' onClick={logoff}>Logout</button>
       <button className="header_button" style={{color:'white',backgroundColor:'black',border:'1px solid'}}>Menu</button>
       <button className="header_button" style={{backgroundColor:'rgb(241, 185, 31)',border:'1px solid rgb(241, 185, 31) '}} onClick={()=>{setnavigate(1)}}>Sign In</button>
@@ -61,6 +69,22 @@ return <Dash u={user}></Dash>
     }
   })()
 }
+<div>
+{
+ (()=>{
+if(isloading)
+{
+  document.querySelector('body').style.opacity='0.3';
+  return <div className="loaderPar"><div className="loader"></div></div>
+}
+else
+{
+  document.querySelector('body').style.opacity='1';
+}
+ })()
+}
+
+</div>
     </div>
   )
 }

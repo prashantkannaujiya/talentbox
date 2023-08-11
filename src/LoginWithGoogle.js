@@ -4,14 +4,15 @@ import { FaGoogle } from "react-icons/fa";
 
 function LoginWithGoogle(props)
 {
-   
+   var[isloading,setisloading]=useState(false)
    
 const login=useGoogleLogin({
     onSuccess: (codeResponse) => {console.log(codeResponse);user_detail(codeResponse);},
     onError: (error) => console.log('Login Failed:', error)
 })
 function user_detail(r)
-{
+{ 
+    setisloading(true)
      fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+r.access_token)
        
      .then((res)=>res.json())
@@ -20,13 +21,14 @@ function user_detail(r)
         insertData(data)
      })
      .catch((err)=>{
+        setisloading(false)
         console.log(err);
      })
     
 }
 function insertData(t)
 {
-    fetch('http://localhost:2100/insertGoogleData',{
+    fetch('https://deploy-tm73.onrender.com/insertGoogleData',{
         method:'post',
         mode:'cors',
         headers:{
@@ -41,6 +43,7 @@ function insertData(t)
     var l = document.getElementById("logout");
     l.style.display = "inline";
     console.log(data.name)
+    setisloading(false)
     props.g(data.name)
 })
     .catch((err)=>{console.log(err)})
@@ -49,6 +52,23 @@ function insertData(t)
         <div>
 
 <a href='#' style={{border:'0px solid'}} onClick={login}><FaGoogle style={{color:'blue',fontSize:'0.8cm'}}></FaGoogle></a>
+<div>
+{
+ (()=>{
+if(isloading)
+{
+   
+  return <div className="loaderPar"><div className="loader"></div></div>
+}
+else
+{
+  document.querySelector('body').style.opacity='1';
+}
+ })()
+}
+
+</div>
+
         </div>
     )
 }

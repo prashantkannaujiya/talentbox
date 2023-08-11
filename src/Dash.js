@@ -5,7 +5,7 @@ function Dash(props)
     var [courses,setcourses]=useState([{courseName:'',pic:''}])
     useEffect(()=>{
         alert('Welcome '+props.u)
-fetch('http://localhost:2100/fetchCourse')
+fetch('https://deploy-tm73.onrender.com/fetchCourse')
 .then(res=>res.json())
 .then((data)=>{
     console.log(data)

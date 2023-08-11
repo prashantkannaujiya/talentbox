@@ -20,6 +20,7 @@ body{
     background-color: black;
     color:white;
     text-align: center;
+    
     height:0.8cm;
     padding-top:5px;
 }
@@ -27,10 +28,6 @@ body{
     position:relative;
     left:12.6cm;
     margin-left:5px;
-}
-span{
-    position:relative;
-    left:1cm;
 }
 #sign{
     text-align: center;
@@ -44,9 +41,10 @@ img{
     margin-top:6px;
     margin-bottom: 6px;
 }
-#courseBox span{
+#courseBox>span{
     position:relative;
     bottom:0.8cm;
+    left: 1cm;
 }
 #dash{
     width:40%;
@@ -63,4 +61,75 @@ img{
     display: none;
     position: relative;
     left:12.5cm;
+}
+.loaderPar{
+    width: 35%;
+    height:5cm;
+    background-color: rgb(218, 216, 216);
+    border-radius: 8px;
+    left:4.5in;
+    position:absolute;
+    bottom:7cm;
+}
+.loader {
+    position:absolute;
+    opacity: 1;
+    right:2in;
+    bottom: 0.6in;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+@media screen and (max-width:600px) {
+    #logout,.header_button{
+        position:static;
+padding: 8px;
+margin:3px;
+    }
+    #webName{
+        font-size: x-large;
+    display: block;    
+    margin-bottom: 0.1cm;
+    }
+    #dash{
+        
+        width:86%;
+        left:0.7cm;
+    }
+    #header{
+        width:100%;
+        
+    }
+    #Dashh{
+        width: 100%;
+    }
+    #courseBox>span{
+        display: inline-block;
+        left:0.5cm;
+        }
+    #header{
+        height:2cm;
+    }
+    .loader{
+        width:20px;
+        height:20px;
+    }
+    #Home{
+        position:static;
+        width:auto;
+        margin-top: 3cm;
+        text-align: center;
+    }
+    .icon{
+        font-size: 0.7cm;
+        margin-right: 1cm;
+    }
 }
